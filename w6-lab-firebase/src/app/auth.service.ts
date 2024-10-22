@@ -3,6 +3,7 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   signOut,
 } from '@angular/fire/auth';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
@@ -45,6 +46,10 @@ export class AuthService {
       console.log("Error on login", e);
       return null;
     }
+  }
+
+  async resetPassword(email: string){
+    return sendPasswordResetEmail(this.auth, email);
   }
 
   logout(){

@@ -62,6 +62,31 @@ export class LoginPage {
     }
   }
 
+  async login(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    const user = await this.authService.login(this.credentials.getRawValue());
+    console.log('🚀 ~ file: login.page.ts:73 ~ LoginPage ~ login ~ user', user);
+
+    await loading.dismiss();
+
+    if(user){
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    }else{
+      this.showAlert('Login failed', 'Please try again');
+    }
+  }
+
+  async sendReset(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.authService.resetPassword(this.email.value);
+    await loading.dismiss();
+    this.showAlert('Password reset', 'Check your email for instructions');
+  }
+
+
   async showAlert(header: string, message: string){
     const alert = await this.alertController.create({
       header,

@@ -10,39 +10,29 @@
     credentials property which will be added to the component class. -->
   <form (ngSubmit)="login()" [formGroup]="credentials">
     <ion-item class="ion-margin-bottom">
-      <ion-input
-        type="email"
-        placeholder="Email"
-        formControlName="email"
-      ></ion-input>
+      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
       <!-- Note appears to the right of slot if input is invalid. If the email input has been touched and is invalid, display the invalid message -->
       @if ((email.dirty || email.touched) && email.errors) {
-        <ion-note slot="end">Email is invalid</ion-note>
+      <ion-note slot="end">Email is invalid</ion-note>
       }
     </ion-item>
     <!-- Add password input -->
     <ion-item class="ion-margin-bottom">
-      <ion-input
-        type="password"
-        placeholder="Password"
-        formControlName="password"
-      ></ion-input>
-    
+      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+
       <!-- Note appears to the right of the slot if input is invalid -->
-      <ion-note
-        slot="end"
-        *ngIf="(password.dirty || password.touched) && password.errors"
-        >Password needs to contain a minimum 6 characters
+      <ion-note slot="end" *ngIf="(password.dirty || password.touched) && password.errors">Password needs to contain a
+        minimum 6 characters
       </ion-note>
-    
+
     </ion-item>
 
     <!-- Add Log in button which is disabled while credentials are invalid -->
-    <ion-button 
-      type="submit" 
-      expand="block" 
-      [disabled]="!credentials.valid"
-      >Log in</ion-button
-    >
+    <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in
+    </ion-button>
+    <ion-button type="button" expand="block" color="secondary" [disabled]="!credentials.valid" (click)="register()">Create Account
+    </ion-button>
+    <ion-button type="button" expand="block" (click)="sendReset()">Reset Password
+    </ion-button>
   </form>
 </ion-content>
